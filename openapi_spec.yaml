@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a round robin tea maker selector for office environments.
+    It will choose a random team member to make the next round of tea.
+    It will also make sure that nobody has to make two rounds in a row.
+  version: "1.0.0"
+  title: Tea Round Robin API
+  contact:
+    email: enric.fortin@gmail.com
+paths:
+  /members:
+    get:
+      summary: shows the list of team members
+      operationId: listMembers
+      description: It shows the list of team members in the system
+      parameters:
+        - in: query
+          name: level
+          description: pass an optional level to filter the list of members
+          required: false
+          schema:
+            type: string
+            enum: [junior, mid, senior]
+      responses:
+        '200':
+          description: team members matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '400':
+          description: bad input parameter
+    post:
+      summary: adds a new team member
+      operationId: addMember
+      description: It adds a new team member to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '201':
+          description: team member created
+        '400':
+          description: bad request body
+  /members/{id}:
+    patch:
+      summary: updates an existing team member
+      operationId: patchMember
+      description: It updates a subset of fields of an existing team member
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the team member
+          required: true
+          schema:
+            type: string
+            format: UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: team member updated
+        '400':
+          description: bad request body
+        '404':
+          description: user with given UUID not found
+    delete:
+      summary: deletes a team member
+      operationId: deleteMember
+      description: It deletes the team member from the system
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the team member
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '204':
+          description: team member deleted
+        '404':
+          description: user with given UUID not found
+  /tea:
+    get:
+      summary: show the status of the current tea round
+      operationId: showTeaRound
+      description: |
+        Show if there is a tea round in progress and who is making it
+      responses:
+        '200':
+          description: latest round of tea
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeaRound'
+    post:
+      summary: request tea
+      operationId: requestTea
+      description: |
+        Request that a new round of tea be brewed by a random member of the team
+        It has a refractory period of 30 minutes during which it is assumed that
+        the previous round of tea is underway.
+      responses:
+        '201':
+          description: round of tea requested
+        '425':
+          description: too early to request a new round of tea
+    delete:
+      summary: void the last tea round
+      operationId: voidTeaRound
+      description: |
+        If for some reason, the person assigned for the new round of tea is not available,
+        the tea round can be voided to override the refractory period of 30 minutes
+      responses:
+        '204':
+          description: tea round voided
+        '404':
+          description: there is no pending round of tea to void
+  /history:
+    get:
+      summary: show a list of all historic tea rounds
+      operationId: showTeaHistory
+      description: |
+        Show a raw list of all tea rounds in the database, sorted by timestamp
+      responses:
+        '200':
+          description: history of tea rounds
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeaRound'
+  /coffee:
+    post:
+      summary: request coffee
+      operationId: requestCoffee
+      responses:
+        '418':
+          description: I'm a tea round robin, not a coffee round robin
+components:
+  schemas:
+    Member:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - level
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        firstName:
+          type: string
+          example: James
+        lastName:
+          type: string
+          example: Bond
+        level:
+          type: string
+          enum: [junior, mid, senior]
+          example: mid
+    TeaRound:
+      type: object
+      required:
+       - timestamp
+       - brewer
+       - voided
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        brewer:
+          $ref: '#/components/schemas/Member'
+        voided:
+          type: boolean
