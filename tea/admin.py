@@ -8,7 +8,7 @@ from tea.models import Profile, TeaRound
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
-    verbose_name_plural = 'profile'
+    verbose_name_plural = "profile"
 
 
 class UserAdmin(BaseUserAdmin):

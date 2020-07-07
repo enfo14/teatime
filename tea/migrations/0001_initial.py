@@ -9,26 +9,30 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
+    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL)]
 
     operations = [
         migrations.CreateModel(
-            name='TeaRound',
+            name="TeaRound",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('voided', models.BooleanField(default=False)),
-                ('made_by', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                ("voided", models.BooleanField(default=False)),
+                (
+                    "made_by",
+                    models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('level', models.IntegerField(choices=[(1, 'Junior'), (2, 'Mid'), (3, 'Senior')], default=1)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("level", models.IntegerField(choices=[(1, "Junior"), (2, "Mid"), (3, "Senior")], default=1)),
+                (
+                    "user",
+                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+                ),
             ],
         ),
     ]
