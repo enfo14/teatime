@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
+from uuid import uuid4
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 class UserLevel(models.IntegerChoices):
@@ -10,20 +8,14 @@ class UserLevel(models.IntegerChoices):
     SENIOR = 3
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Member(models.Model):
+    id = models.UUIDField(default=uuid4, primary_key=True)
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
     level = models.IntegerField(choices=UserLevel.choices, default=UserLevel.JUNIOR)
 
 
 class TeaRound(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
-    made_by = models.ForeignKey(to=User, on_delete=models.PROTECT)
+    made_by = models.ForeignKey(to=Member, on_delete=models.PROTECT)
     voided = models.BooleanField(default=False)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    else:
-        instance.profile.save()
