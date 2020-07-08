@@ -15,3 +15,4 @@ class TeaSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeaRound
         fields = ["timestamp", "made_by", "voided"]
+        depth = 1

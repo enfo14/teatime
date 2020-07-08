@@ -29,3 +29,16 @@ def make_tea(make_member):
         return tea
 
     return _make
+
+
+@pytest.fixture
+def make_all_members(make_member):
+    make_member(first_name="John", last_name="Watson", level=models.UserLevel.JUNIOR)
+    make_member(first_name="Bruce", last_name="Wayne", level=models.UserLevel.JUNIOR)
+    make_member(first_name="James", last_name="Bond", level=models.UserLevel.JUNIOR)
+    make_member(first_name="Sherlock", last_name="Holmes", level=models.UserLevel.MID)
+    make_member(first_name="Thomas", last_name="Magnum", level=models.UserLevel.MID)
+    make_member(first_name="Harry", last_name="Hole", level=models.UserLevel.MID)
+    make_member(first_name="Jane", last_name="Marple", level=models.UserLevel.SENIOR)
+    make_member(first_name="Hercule", last_name="Poirot", level=models.UserLevel.SENIOR)
+    make_member(first_name="Dirk", last_name="Gently", level=models.UserLevel.SENIOR)
