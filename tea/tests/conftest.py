@@ -1,6 +1,12 @@
 import pytest
+from rest_framework.test import APIRequestFactory
 
 from tea import models
+
+
+@pytest.fixture
+def api_rf():
+    return APIRequestFactory()
 
 
 @pytest.fixture
@@ -9,7 +15,7 @@ def make_member():
         kwargs.setdefault("first_name", "Foo")
         kwargs.setdefault("last_name", "Bar")
         kwargs.setdefault("level", models.UserLevel.JUNIOR)
-        member = models.Member.objects.get_or_create(**kwargs)
+        member, created = models.Member.objects.get_or_create(**kwargs)
         return member
 
     return _make
