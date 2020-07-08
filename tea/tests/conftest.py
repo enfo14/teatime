@@ -16,9 +16,9 @@ def make_member():
 
 
 @pytest.fixture
-def make_tea(make_user):
+def make_tea(make_member):
     def _make(**kwargs):
-        kwargs.setdefault("made_by", make_user())
+        kwargs.setdefault("made_by", make_member())
         tea = models.TeaRound.objects.create(**kwargs)
         return tea
 
