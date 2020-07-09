@@ -49,8 +49,57 @@ paths:
         '400':
           description: bad request body
   /members/{id}:
+    get:
+      summary: retrieves a single team member
+      operationId: getMember
+      description: It retrieves a single team member
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the team member
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: team member retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '404':
+          description: user with given UUID not found
+    put:
+      summary: updates an existing team member in-place
+      operationId: updateMember
+      description: It updates all fields of an existing team member
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the team member
+          required: true
+          schema:
+            type: string
+            format: UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: team member updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '400':
+          description: bad request body
+        '404':
+          description: user with given UUID not found
     patch:
-      summary: updates an existing team member
+      summary: partially updates an existing team member
       operationId: patchMember
       description: It updates a subset of fields of an existing team member
       parameters:
@@ -69,6 +118,10 @@ paths:
       responses:
         '200':
           description: team member updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
         '400':
           description: bad request body
         '404':
@@ -155,7 +208,6 @@ components:
     Member:
       type: object
       required:
-        - id
         - firstName
         - lastName
         - level
@@ -184,7 +236,7 @@ components:
         timestamp:
           type: string
           format: date-time
-          example: 2017-07-21T17:32:28Z
+          example: '2017-07-21T17:32:28Z'
         brewer:
           $ref: '#/components/schemas/Member'
         voided:
