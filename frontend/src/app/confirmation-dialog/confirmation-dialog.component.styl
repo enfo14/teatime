@@ -1,0 +1,44 @@
+@import "~src/styles/partials/variables/variables"
+@import "~src/styles/partials/mixins/mixins"
+
+.confirmation_dialog
+    position fixed
+    z-index 1
+    left 0
+    top 0
+    width 100%
+    height 100%
+    overflow auto;
+    background-color rgb(0,0,0)
+    background-color rgba(0,0,0,0.4)
+
+    &__inner
+        margin 25% auto
+        width 80%
+        +above(3)
+            width 70%
+        +above(6)
+            width 60%
+        background-color $cl--third
+        border-right 2px solid $cl--third--low
+        border-bottom 2px solid $cl--third--low
+        border-radius $sp--third
+        padding $sp--half
+
+    &__text
+        fz-scale--one()
+        color white
+
+    &__actions
+        display flex
+        margin $sp--third auto 0
+        width 60%
+        justify-content space-evenly
+
+    &__action
+        fz-scale--one()
+        background-color $cl--low
+        color white
+        padding 0 $sp--third
+        border-radius $bdrs
+        cursor pointer

@@ -17,21 +17,7 @@ export class ConfirmationDialog implements OnInit {
 
   constructor(private store: Store<AppState>) { }
 
-  ngOnInit(): void {
-
-  }
-
-  @HostListener('click')
-  clickIn() {
-    this.clickedInside = true;
-  }
-
-  @HostListener('document:click')
-  clickOut() {
-    if (!this.clickedInside) {
-      this.close()
-    }
-    this.clickedInside = false;
+  ngOnInit() {
   }
 
   open() {

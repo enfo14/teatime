@@ -1,7 +1,9 @@
 <div *ngIf="active" class="confirmation_dialog">
-  <p>Are you sure that you want to {{ description }}?</p>
-  <div class="confirmation_dialog__actions">
-    <span class="confirmation_dialog__reject" (click)="onNoClick()">No</span>
-    <span class="confirmation_dialog__accept" (click)="onYesClick()">Yes</span>
+  <div class="confirmation_dialog__inner">
+    <p class="confirmation_dialog__text">Are you sure that you want to {{ description }}?</p>
+    <div class="confirmation_dialog__actions">
+      <span class="confirmation_dialog__action confirmation_dialog__action--no" (click)="onNoClick()">No</span>
+      <span class="confirmation_dialog__action confirmation_dialog__action--yes" (click)="onYesClick()">Yes</span>
+    </div>
   </div>
 </div>
