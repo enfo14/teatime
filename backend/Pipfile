@@ -17,6 +17,7 @@ djangorestframework = "*"
 psycopg2-binary = "*"
 envparse = "*"
 python-dateutil = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.7"
