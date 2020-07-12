@@ -1,6 +1,27 @@
 // you'll find an explanation for using these mixins in the documentation.
 // the intention is for you not to edit this file; if you want to edit the size of
 // your h1 element, for example, edit the type scaling ratios instead.
+
+fz-scale--seven()
+    font-size ($fz--base * $ratio--sml ** 7)
+    font-size var(--fz-ratio-power--seven)
+    +above(3)
+        font-size ($fz--base * $ratio--med ** 7)
+        font-size var(--fz-ratio-power--seven)
+    +above(6)
+        font-size ($fz--base * $ratio--lrg ** 7)
+        font-size var(--fz-ratio-power--seven)
+
+fz-scale--six()
+    font-size ($fz--base * $ratio--sml ** 6)
+    font-size var(--fz-ratio-power--six)
+    +above(3)
+        font-size ($fz--base * $ratio--med ** 6)
+        font-size var(--fz-ratio-power--six)
+    +above(6)
+        font-size ($fz--base * $ratio--lrg ** 6)
+        font-size var(--fz-ratio-power--six)
+
 fz-scale--four()
     font-size ($fz--base * $ratio--sml ** 4)
     font-size var(--fz-ratio-power--four)

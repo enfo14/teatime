@@ -24,7 +24,13 @@ export class TeaTimeService {
      */
     const url: URL = new URL('tea/', environment.apiUrl);
     return this.http.get<Tea[]>(url.toString()).pipe(
-      map(tea => TeaTimeActions.GetTeaRoundSuccess({ tea })),
+      map(tea => {
+        if (tea.length > 0) {
+          return TeaTimeActions.GetTeaRoundSuccess({ tea: tea[0] })
+        } else {
+          return TeaTimeActions.GetTeaRoundSuccess({ tea: null })
+        }
+      }),
       catchError(this.handleError)
     );
   }

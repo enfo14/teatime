@@ -1,1 +1,18 @@
-<p>main works!</p>
+<div class="time_for_tea" [ngClass]="{'time_for_tea--active': !(tea$ | async)}" (click)="requestTea()">
+  <h1>Time for tea!</h1>
+</div>
+
+<div class="tea_info" *ngIf="tea$ | async as tea">
+  <div class="tea_info__primary">
+    <span>The tea maker in charge of the next round is</span>
+    <span class="tea_info__name">{{ tea.made_by.first_name }} {{ tea.made_by.last_name }}</span>
+    <span>They're probably already on it!</span>
+  </div>
+  <div class="tea_info__secondary">
+    <span class="tea_info__void_button" (click)="requestVoidTea()"></span>
+    <span>
+      Void this round of tea if it was requested by accident, or if {{ tea.made_by.first_name }} is unavailable.
+    </span>
+    <confirmation-dialog #voidTea [action]="voidAction" description="void this round of tea"></confirmation-dialog>
+  </div>
+</div>

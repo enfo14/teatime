@@ -7,7 +7,7 @@ import { TeaTimeService } from '../teatime.service'
 import { Tea, TeaMaker } from '../teatime.models';
 
 @Injectable()
-export class TeaEffects {
+export class TeaTimeEffects {
   constructor(private actions$: Actions, private backend: TeaTimeService) {}
 
   getTeaRound$ = createEffect(() => {

@@ -5,33 +5,33 @@ import { Store } from '@ngrx/store';
 
 import { TeaTimeService } from './teatime.service';
 import { environment } from 'src/environments/environment';
-import { Level, Tea, TeaMaker } from './teatime.models';
-import { TeaState } from './store/tea.state';
+import { Tea, TeaMaker } from './teatime.models';
+import { TeaTimeState } from './store/tea.state';
 import { TeaTimeActions } from './store/tea.actions';
-import { map } from 'rxjs/operators';
+import { AppState } from './app.reducers';
 
-const initialState: TeaState = {
+const initialState: TeaTimeState = {
   tea: null,
   teaMakers: [],
   history: [],
 };
 
 describe('TeaTimeService', () => {
-  let store: MockStore<TeaState>;
+  let store: MockStore<AppState>;
   let service: TeaTimeService;
   let httpTestingController: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [provideMockStore({ initialState })],
+      providers: [provideMockStore({ initialState: { teaTime: initialState }})],
     });
   }));
 
   beforeEach(() => {
     httpTestingController = TestBed.get(HttpTestingController);
     service = TestBed.get(TeaTimeService);
-    store = TestBed.get<Store<TeaState>>(Store);
+    store = TestBed.get<Store<AppState>>(Store);
     spyOn(store, 'dispatch');
   });
 
@@ -57,18 +57,36 @@ describe('TeaTimeService', () => {
   });
 
   describe('getCurrentTea', () => {
+    let tea: Tea = {
+      timestamp: new Date('2017-05-20T11:03:21Z'),
+      made_by: { id: '1', first_name: 'James', last_name: 'Bond', level: 1},
+      voided: false,
+    }
+
     it('gets the current tea round from the API', done => {
       service.getCurrentTea().subscribe(action => {
-        expect(action).toEqual(TeaTimeActions.GetTeaRoundSuccess({ tea: [] }));
+        expect(action).toEqual(TeaTimeActions.GetTeaRoundSuccess({ tea }));
         done();
-      })
+      });
       const req = httpTestingController.expectOne(
        req => req.url === new URL('tea/', environment.apiUrl).toString()
       );
       expect(req.request.method).toEqual('GET');
+      req.flush([tea]);
+    });
+
+    it('handles a successful, but empty response', done => {
+      service.getCurrentTea().subscribe(action => {
+        expect(action).toEqual(TeaTimeActions.GetTeaRoundSuccess({ tea: null }));
+        done();
+      });
+        const req = httpTestingController.expectOne(
+        req => req.url === new URL('tea/', environment.apiUrl).toString()
+      );
+      expect(req.request.method).toEqual('GET');
       req.flush([]);
-    })
-  })
+    });
+  });
 
   describe('requestTea', () => {
     let tea: Tea = {

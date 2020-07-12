@@ -1,12 +1,12 @@
 import { Tea, TeaMaker } from '../teatime.models';
 
-export interface TeaState {
+export interface TeaTimeState {
   tea: Tea;
   teaMakers: TeaMaker[];
   history: Tea[];
 }
 
-export const initialState: TeaState = {
+export const initialState: TeaTimeState = {
   tea: null,
   teaMakers: [],
   history: [],

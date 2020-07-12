@@ -19,7 +19,7 @@ enum Actions {
 }
 
 const GetTeaRound = createAction(Actions.GetTeaRound);
-const GetTeaRoundSuccess = createAction(Actions.GetTeaRoundSuccess, props<{ tea: Tea[] }>());
+const GetTeaRoundSuccess = createAction(Actions.GetTeaRoundSuccess, props<{ tea: Tea }>());
 
 const RequestTeaRound = createAction(Actions.RequestTeaRound);
 const RequestTeaRoundSuccess = createAction(Actions.RequestTeaRoundSuccess, props<{ tea: Tea }>());

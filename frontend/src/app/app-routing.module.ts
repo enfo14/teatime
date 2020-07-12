@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { MakersComponent } from './makers/makers.component';
-import { StatsComponent } from './stats/stats.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
     {
@@ -15,8 +15,8 @@ const routes: Routes = [
         component: MakersComponent,
     },
     {
-        path: 'stats',
-        component: StatsComponent,
+        path: 'history',
+        component: HistoryComponent,
     }
 ]
 
