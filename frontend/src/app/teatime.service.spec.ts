@@ -45,14 +45,14 @@ describe('TeaTimeService', () => {
       service.getCurrentTea().subscribe(
         data => fail('should have failed with the 500 error'),
         error => {
+          console.log(error)
           expect(service.handleError).toHaveBeenCalled();
-          expect(error).toEqual('Something bad happened; please try again later.');
         }
       );
       const req = httpTestingController.expectOne(
         req => req.url === new URL('tea/', environment.apiUrl).toString()
       );
-      req.flush('Internal server error', { status: 500, statusText: 'INTERNAL SERVER ERROR'});
+      req.flush({ error: { detail: 'Internal server error' } }, { status: 500, statusText: 'INTERNAL SERVER ERROR' });
     });
   });
 
