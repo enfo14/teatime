@@ -1,1 +1,19 @@
-<p>history works!</p>
+<h1 class="history__heading">History</h1>
+
+<div class="history__stats">
+  <h2 class="history__stats_heading">Statistics</h2>
+  <ul class="history__stats_items" *ngIf="(history$ | async).length">
+    <li class="history__stats_item"><span class="history__stats_number">{{ (history$ | async).length }}</span>rounds of tea</li>
+    <li class="history__stats_item"><span class="history__stats_number">{{ (lastWeek$ | async).length }}</span>rounds in the past week</li>
+  </ul>
+</div>
+
+<div class="history__top_makers">
+  <h2 class="history__top_makers_heading">Top Makers</h2>
+  <ul class="history__top_makers_list" *ngIf="(topMakers$ | async).length">
+    <li class="history__top_makers_item" *ngFor="let maker of topMakers$ | async | slice:0:5">
+      <span class="history__top_makers_field history__top_makers_field--name">{{ maker.first_name }} {{ maker.last_name }}</span>
+      <span class="history__top_makers_field history__top_makers_field--score">{{ maker.rounds.length }}</span>
+    </li>
+  </ul>
+</div>

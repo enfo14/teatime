@@ -1,0 +1,89 @@
+@import "~src/styles/partials/variables/variables"
+@import "~src/styles/partials/mixins/mixins"
+
+:host
+    width 100%
+    display flex
+    flex-direction column
+
+.history
+    &__heading
+        display flex
+        justify-content center
+        align-items center
+        fz-scale--seven()
+        text-align center
+        letter-spacing 0.035em
+        color white
+
+        &::before
+            content ''
+            display inline-block
+            width $sp
+            +above(3)
+                width $sp--plus-half
+            height $sp--triple
+            +above(4)
+                height $sp--quadruple
+            margin-right $sp--sixth
+            background-image url("src/assets/images/teabag.svg")
+            background-repeat no-repeat
+            background-position 50% 25%
+            background-size contain
+
+    &__stats
+    &__top_makers
+        margin $sp--plus-half auto 0
+        width 100%
+        +above(3)
+            width 90%
+        +above(6)
+            width 80%
+        padding $sp
+        background-color $cl--second
+        border-radius $sp
+        border-bottom 2px solid $cl--second--low
+        border-right 2px solid $cl--second--low
+
+        &_heading
+            max-width none
+            text-align center
+            color $cl--off
+
+    &__stats
+        &_items
+            display flex
+            flex-direction column
+            +above(2)
+                flex-direction row
+            justify-content space-evenly
+            margin-top $sp
+
+        &_item
+            display flex
+            flex-direction column
+            justify-content center
+            color $cl--off
+            fz-scale--one()
+            text-align center
+            mt()
+            +above(2)
+                mt(0)
+
+        &_number
+            fz-scale--four()
+            font-weight 900
+            line-height 1
+
+    &__top_makers
+        &_items
+            margin-top $sp--half
+
+        &_item
+            display flex
+            flex-direction row
+            justify-content space-between
+            color $cl--off
+
+        &_field
+            font-weight bold
