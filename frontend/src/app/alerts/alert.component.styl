@@ -1,0 +1,48 @@
+
+@import "~src/styles/partials/variables/variables"
+@import "~src/styles/partials/mixins/mixins"
+
+:host
+    position absolute
+    width 100%
+
+.alert
+    width 92%
+    margin 0 auto
+    mt($sp--half)
+    padding $sp--quarter $sp--half
+    border-radius $bdrs
+    box-shadow 1px 2px 5px alpha($cl--dark, 50%)
+    background-color $cl--off
+    font-weight bold
+
+    &:first-child
+        margin-top $sp
+
+    &--success
+        background-color $cl--success
+        color $cl--off
+
+    &--error
+        background-color $cl--error
+        color $cl--off
+
+    &--warning
+        background-color $cl--focus
+
+    &--fade
+        animation fade-out ease 0.4s
+        -webkit-animation fade-out ease 0.4s
+        -moz-animation fade-out ease 0.4s
+        -o-animation fade-out ease 0.4s
+        -ms-animation fade-out ease 0.4s
+
+    > .close
+        margin 0 $sp--third
+
+
+@keyframes fade-out
+    0%
+        opacity 1
+    100%
+        opacity 0

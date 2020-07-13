@@ -6,14 +6,18 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Tea, TeaMaker } from './teatime.models';
 import { TeaTimeActions } from './store/tea.actions';
+import { AlertService } from './alerts/alert.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeaTimeService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private alerts: AlertService) {
+    this.handleError.bind(this.handleError);
+  }
 
   handleError(error: HttpErrorResponse) {
+    this.alerts.error(error.error.detail);
     console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
     return throwError('Something bad happened; please try again later.');
   }
@@ -45,6 +49,7 @@ export class TeaTimeService {
       catchError(error => {
         if (error.status === 400) {
           // if the error status is 400 someone else has already requested tea
+          this.alerts.error(error.error);
           return of(TeaTimeActions.GetTeaRound())
         } else {
           return this.handleError(error)

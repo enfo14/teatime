@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { metaReducers } from './app.reducers';
 import { HeaderComponent } from './header/header.component';
 import { MakerLevelPipe } from './maker-level.pipe';
+import { AlertModule } from './alerts/alert.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MakerLevelPipe } from './maker-level.pipe';
     MakerLevelPipe,
   ],
   imports: [
+    AlertModule,
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
