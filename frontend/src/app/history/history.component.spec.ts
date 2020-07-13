@@ -80,7 +80,7 @@ describe('HistoryComponent', () => {
 
   it('should combine the makers and history data to get the top makers', done => {
     component.topMakers$.subscribe(topMakers => {
-      expect(topMakers[0].id).toEqual(makers[0]);
+      expect(topMakers[0].id).toEqual(makers[0].id);
       expect(topMakers[0].rounds.length).toEqual(3);
       done();
     });
