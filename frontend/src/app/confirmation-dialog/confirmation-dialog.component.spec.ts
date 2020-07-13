@@ -54,7 +54,7 @@ describe('ConfirmationDialog', () => {
 
   describe('onYesClick', () => {
     beforeEach(() => {
-      component.action = TeaTimeActions.VoidTeaRound;
+      component.action = TeaTimeActions.VoidTeaRound();
       spyOn(component, 'close').and.callThrough();
     });
 

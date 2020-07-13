@@ -31,10 +31,10 @@ const GetTeaMakers = createAction(Actions.GetTeaMakers);
 const GetTeaMakersSuccess = createAction(Actions.GetTeaMakersSuccess, props<{ makers: TeaMaker[] }>());
 
 const CreateTeaMaker = createAction(Actions.CreateTeaMaker, props<{ maker: Partial<TeaMaker> }>());
-const CreateTeaMakerSuccess = createAction(Actions.CreateTeaMakerSuccess);
+const CreateTeaMakerSuccess = createAction(Actions.CreateTeaMakerSuccess, props<{ maker: TeaMaker }>());
 
-const DeleteTeaMaker = createAction(Actions.DeleteTeaMaker, props<{ id }>());
-const DeleteTeaMakerSuccess = createAction(Actions.DeleteTeaMakerSuccess);
+const DeleteTeaMaker = createAction(Actions.DeleteTeaMaker, props<{ id: string }>());
+const DeleteTeaMakerSuccess = createAction(Actions.DeleteTeaMakerSuccess, props<{ id: string }>());
 
 const GetTeaHistory = createAction(Actions.GetTeaHistory);
 const GetTeaHistorySuccess = createAction(Actions.GetTeaHistorySuccess, props<{ history: Tea[] }>());

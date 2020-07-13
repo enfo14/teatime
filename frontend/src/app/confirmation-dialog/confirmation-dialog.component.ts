@@ -13,8 +13,6 @@ export class ConfirmationDialog implements OnInit {
   @Input() description;
   active: boolean = false;
 
-  private clickedInside: boolean = false;
-
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -29,7 +27,7 @@ export class ConfirmationDialog implements OnInit {
   }
 
   onYesClick() {
-    this.store.dispatch(this.action());
+    this.store.dispatch(this.action);
     this.close()
   }
 

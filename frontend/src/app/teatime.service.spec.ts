@@ -190,21 +190,21 @@ describe('TeaTimeService', () => {
 
     it('adds a new tea maker to the API', done => {
       service.createTeaMaker(maker).subscribe(action => {
-        expect(action).toEqual(TeaTimeActions.CreateTeaMakerSuccess());
+        expect(action).toEqual(TeaTimeActions.CreateTeaMakerSuccess({ maker }));
         done();
       })
       const req = httpTestingController.expectOne(
        req => req.url === new URL('members/', environment.apiUrl).toString()
       );
       expect(req.request.method).toEqual('POST');
-      req.flush({});
+      req.flush(maker);
     });
   });
 
   describe('deleteTeaMaker', () => {
     it('deletes a tea maker from the API', done => {
       service.deleteTeaMaker({ id: '4' }).subscribe(action => {
-        expect(action).toEqual(TeaTimeActions.DeleteTeaMakerSuccess());
+        expect(action).toEqual(TeaTimeActions.DeleteTeaMakerSuccess({ id: '4' }));
         done();
       })
       const req = httpTestingController.expectOne(

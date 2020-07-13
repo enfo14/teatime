@@ -1,1 +1,41 @@
-<p>makers works!</p>
+<h1 class="makers__heading">Tea makers</h1>
+
+<ul class="makers__list" *ngIf="(makers$ | async).length">
+  <li class="makers__row" *ngFor="let maker of makers$ | async">
+    <tea-maker [maker]="maker"></tea-maker>
+  </li>
+</ul>
+
+<div class="makers__add">
+  <span>Missing someone? You can add them here!</span>
+  <span class="makers__add_button" (click)='openForm()'></span>
+</div>
+
+<div class="makers__form" *ngIf="formActive">
+  <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+    <h2 class="form__heading">New tea maker</h2>
+    <div class="form__fields">
+      <label class="form__field" for="first_name">
+        First name:
+        <input type="text" formControlName="first_name" required>
+      </label>
+      <label class="form__field" for="last_name">
+        Last name:
+        <input type="text" formControlName="last_name" required>
+      </label>
+      <label class="form__field form__field--spaced" for="level">
+        Level:
+        <select formControlName="level" required>
+          <option [ngValue]="null" disabled>Choose a level</option>
+          <option *ngFor="let level of levelOptions" [ngValue]="level.value">
+            {{ level.label }}
+          </option>
+        </select>
+      </label>
+    </div>
+    <div class="form__actions">
+      <button class="form__action form_action--cancel" (click)="resetForm()">Cancel</button>
+      <button class="form__action form_action--submit" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

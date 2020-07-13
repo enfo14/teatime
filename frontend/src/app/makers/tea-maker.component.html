@@ -1,0 +1,4 @@
+<span class="tea_maker__field tea_maker__field--name">{{ maker.first_name }} {{ maker.last_name }}</span>
+<span class="tea_maker__field tea_maker__field--level">{{ maker.level | makerLevel }}</span>
+<span class="tea_maker__field tea_maker__field--delete" (click)="deleteMaker()">Delete</span>
+<confirmation-dialog #confirmation [description]="'delete ' + maker.first_name + ' from the system'" [action]="action"></confirmation-dialog>

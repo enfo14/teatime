@@ -13,6 +13,6 @@
     <span>
       Void this round of tea if it was requested by accident, or if {{ tea.made_by.first_name }} is unavailable.
     </span>
-    <confirmation-dialog #voidTea [action]="voidAction" description="void this round of tea"></confirmation-dialog>
+    <confirmation-dialog #voidTea [action]="voidAction()" description="void this round of tea"></confirmation-dialog>
   </div>
 </div>

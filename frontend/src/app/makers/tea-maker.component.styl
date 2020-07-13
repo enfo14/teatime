@@ -1,0 +1,35 @@
+@import "~src/styles/partials/variables/variables"
+@import "~src/styles/partials/mixins/mixins"
+
+:host
+    display flex
+    flex-direction row
+    justify-content space-between
+    width 100%
+
+.tea_maker__field
+    fz-scale--one()
+    flex 0 1 33%
+    color $cl--off
+
+    &--name
+        font-weight bold
+
+    &--level
+        text-align center
+
+    &--delete
+        text-align right
+        height $sp
+        cursor pointer
+
+        &::after
+            content ''
+            display inline-block
+            width $sp--half
+            height $sp--half
+            margin-left $sp--quarter
+            background-image url("src/assets/images/cross.svg")
+            background-repeat no-repeat
+            background-position center
+            background-size cover

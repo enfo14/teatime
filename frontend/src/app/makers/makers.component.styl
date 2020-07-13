@@ -1,0 +1,114 @@
+@import "~src/styles/partials/variables/variables"
+@import "~src/styles/partials/mixins/mixins"
+
+:host
+    width 100%
+    display flex
+    flex-direction column
+
+.makers
+    &__heading
+        fz-scale--seven()
+        text-align center
+        letter-spacing 0.035em
+        color white
+
+    &__list
+        margin 0 auto
+        width 100%
+        +above(3)
+            width 90%
+        +above(6)
+            width 80%
+        padding $sp
+        background-color $cl--second
+        border-radius $sp
+        border-bottom 2px solid $cl--second--low
+        border-right 2px solid $cl--second--low
+
+    &__add
+        display flex
+        align-items center
+        margin $sp auto 0
+        fz-scale--one()
+        font-weight bold
+        color $cl--off
+
+    &__add_button
+        width $sp
+        height $sp
+        margin-left $sp--third
+
+        &::after
+            content ''
+            display inline-block
+            width $sp
+            height $sp
+            background-image url("src/assets/images/plus.svg")
+            background-repeat no-repeat
+            background-position center
+            background-size cover
+            cursor pointer
+
+.makers__form
+    position fixed
+    z-index 1
+    left 0
+    top 0
+    width 100vw
+    height 100vh
+    overflow hidden
+    background-color rgb(0,0,0)
+    background-color rgba(0,0,0,0.4)
+
+.form
+    margin 25vh auto
+    width 80%
+    +above(3)
+        width 70%
+    +above(6)
+        width 60%
+    background-color $cl--third
+    border-right 2px solid $cl--third--low
+    border-bottom 2px solid $cl--third--low
+    border-radius $sp--third
+    padding $sp--half
+
+    &__heading
+        max-width none
+        width 100%
+        text-align center
+        font-family $ff--heading
+        fz-scale--two()
+        color white
+
+    &__fields
+        margin-top $sp--third
+        display flex
+        flex-direction column
+        align-items center
+
+    &__field
+        margin-top $sp--third
+        fz-scale--one()
+        color $cl--off
+        font-weight bold
+
+        &--spaced
+            margin-top $sp
+
+    &__actions
+        display flex
+        margin $sp auto 0
+        width 60%
+        justify-content space-evenly
+
+    &__action
+        fz-scale--one()
+        background-color $cl--low
+        color white
+        padding 0 $sp--third
+        border-radius $bdrs
+        border-right 2px solid $cl--dark
+        border-bottom 2px solid $cl--dark
+        cursor pointer

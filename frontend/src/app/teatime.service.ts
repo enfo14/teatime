@@ -81,8 +81,8 @@ export class TeaTimeService {
      */
 
     const url: URL = new URL('members/', environment.apiUrl);
-    return this.http.post(url.toString(), data).pipe(
-      map(() => TeaTimeActions.CreateTeaMakerSuccess()),
+    return this.http.post<TeaMaker>(url.toString(), data).pipe(
+      map(maker => TeaTimeActions.CreateTeaMakerSuccess({ maker })),
       catchError(this.handleError)
     );
   }
@@ -93,7 +93,7 @@ export class TeaTimeService {
      */
     const url: URL = new URL(`members/${id}/`, environment.apiUrl);
     return this.http.delete(url.toString()).pipe(
-      map(() => TeaTimeActions.DeleteTeaMakerSuccess()),
+      map(() => TeaTimeActions.DeleteTeaMakerSuccess({ id })),
       catchError(this.handleError)
     )
   }
