@@ -1,7 +1,7 @@
 
 # TeaTime - A round robin to make tea
 
-TeaTime is a simple app to select random tea members to make tea, like a round robin but for tea.
+TeaTime is a simple app to select random tea members to make tea, like a round robin but for tea. The OpenAPI specification of the API is also included in the repository.
 
 ## How to run with Docker
 
