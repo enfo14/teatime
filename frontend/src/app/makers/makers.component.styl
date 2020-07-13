@@ -8,13 +8,27 @@
 
 .makers
     &__heading
+        display flex
+        justify-content center
+        align-items center
         fz-scale--seven()
         text-align center
         letter-spacing 0.035em
         color white
 
+        &::before
+            content ''
+            display inline-block
+            width $sp * 2.5
+            height $sp--double
+            margin-right $sp--half
+            background-image url("src/assets/images/teacup.svg")
+            background-repeat no-repeat
+            background-position center
+            background-size contain
+
     &__list
-        margin 0 auto
+        margin $sp--plus-half auto 0
         width 100%
         +above(3)
             width 90%
@@ -47,7 +61,7 @@
             background-image url("src/assets/images/plus.svg")
             background-repeat no-repeat
             background-position center
-            background-size cover
+            background-size contain
             cursor pointer
 
 .makers__form
