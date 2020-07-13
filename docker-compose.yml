@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: tea_time_user
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: tea_time
+
+  backend-init:
+    build: backend/
+    command: python manage.py migrate
+    environment:
+      DATABASE_NAME: tea_time
+      DATABASE_USER: tea_time_user
+      DATABASE_PASSWORD: password123
+      DATABASE_HOST: db
+    depends_on:
+      - db
+
+  backend:
+    build: backend/
+    environment:
+      DATABASE_NAME: tea_time
+      DATABASE_USER: tea_time_user
+      DATABASE_PASSWORD: password123
+      DATABASE_HOST: db
+    depends_on:
+      - db
+      - backend-init
+    ports:
+      - 8000:8000
+
+  frontend:
+    build: frontend/
+    ports:
+      - 8080:80
